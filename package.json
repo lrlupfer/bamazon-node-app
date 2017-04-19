@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/lrlupfer/bamazon-node-app/issues"
   },
-  "homepage": "https://github.com/lrlupfer/bamazon-node-app#readme"
+  "homepage": "https://github.com/lrlupfer/bamazon-node-app#readme",
+  "dependencies": {
+    "mysql": "^2.13.0",
+    "inquirer": "^3.0.1"
+  },
+  "devDependencies": {}
 }
