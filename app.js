@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "44RvXf2pAhfoHWMs",
+  password: "", // your password
   database: "bamazon"
 
 });
@@ -19,7 +19,7 @@ connection.connect(function(err) {
 
   if (err) throw err;
 
-  console.log("Connected as ID: " + connection.threadId);
+  // console.log("Connected as ID: " + connection.threadId);
 
 });
 
@@ -42,6 +42,7 @@ var start = function() {
 				res[i].price, res[i].stock_quantity]);
 		}
 		console.log(table.toString());
+		// asks user what they'd like to purchase and how many
 		inquirer.prompt([
 		{
 			name: "itemId",
@@ -73,12 +74,12 @@ var start = function() {
 		});
 	});
 };
-
+// takes answers and updates table in db to reflect stock quantities
 function purchase(ID, quantityNeeded) {
 
 	connection.query("SELECT * FROM inventory WHERE item_id = " + ID, function (err, res) {
 		if (err) throw err;
-
+		// if the item(s) is available, let user know cost
 		if (quantityNeeded <= res[0].stock_quantity) {
 			var totalCost = res[0].price * quantityNeeded;
 
@@ -86,6 +87,7 @@ function purchase(ID, quantityNeeded) {
 			console.log("Your total cost is $" + totalCost + ". Thank you for your purchase!");
 
 			connection.query("UPDATE inventory SET stock_quantity = stock_quantity - " + quantityNeeded + " WHERE item_id = " + ID);
+		// if the item(s) isn't available, let the user know
 		} else {
 			console.log("Our apologies. We don't have enough of that item to fulfill your order.");
 		};

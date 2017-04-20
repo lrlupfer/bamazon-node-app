@@ -8,8 +8,8 @@ var Table = require("cli-table");
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
-    user: "root", //Your username
-    password: "44RvXf2pAhfoHWMs", //Your password
+    user: "root",
+    password: "", // your password
     database: "bamazon"
 });
 
